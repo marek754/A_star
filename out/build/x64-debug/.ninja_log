@@ -1,0 +1,15 @@
+# ninja log v5
+20	1463	6987699294282198	A_star/CMakeFiles/A_star.dir/source/main.cpp.obj	5e628633f3ecc69d
+6	972	6985954599148240	A_star/CMakeFiles/A_star.dir/A_star.cpp.obj	ecc9b12bcb9daac
+1556	1783	6987699297164483	A_star/A_star.exe	c69b4f12788fa72b
+27	1420	6987699293843370	A_star/CMakeFiles/A_star.dir/source/Node.cpp.obj	f3d20735a5cf4c69
+16	947	6986000728187637	A_star/CMakeFiles/A_star.dir/source/A_star.cpp.obj	209c4044aba6b5bd
+23	1413	6987699293773559	A_star/CMakeFiles/A_star.dir/source/Grid.cpp.obj	585754605fd9a51d
+31	1556	6987699295209710	A_star/CMakeFiles/A_star.dir/source/PathFinder.cpp.obj	5371296845d27f57
+13	1038	6987700586387087	A_star/CMakeFiles/A_star.dir/source/PathFinder.cpp.obj	5371296845d27f57
+9	929	6987701201213038	A_star/CMakeFiles/A_star.dir/source/main.cpp.obj	5e628633f3ecc69d
+929	1061	6987701202320079	A_star/A_star.exe	c69b4f12788fa72b
+10	920	6987701786817126	A_star/CMakeFiles/A_star.dir/source/main.cpp.obj	5e628633f3ecc69d
+9	976	6987702084391421	A_star/CMakeFiles/A_star.dir/source/main.cpp.obj	5e628633f3ecc69d
+13	1088	6987702085518399	A_star/CMakeFiles/A_star.dir/source/PathFinder.cpp.obj	5371296845d27f57
+1088	1219	6987702086595521	A_star/A_star.exe	c69b4f12788fa72b
