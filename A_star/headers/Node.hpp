@@ -1,6 +1,7 @@
 #pragma once
 
 #include "SFML/Graphics.hpp"
+#include <map>
 
 enum class NodeState {
     open,

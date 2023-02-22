@@ -1,7 +1,5 @@
 #include "../headers/PathFinder.hpp"
 
-#include <iostream>
-
 PathFinder::PathFinder() {
 	window.create(sf::VideoMode(GRID_SIZE_X * (SQUARE_SIZE + GRID_GAP), GRID_SIZE_Y * (SQUARE_SIZE + GRID_GAP)), "A*");
 	window.setFramerateLimit(144);;
@@ -108,19 +106,19 @@ void PathFinder::render() {
 }
 
 void PathFinder::selectOrDeselectObstacles() {
-		grid.forEachNode([&](Node &node) {
-			sf::Vector2f worldPosition = window.mapPixelToCoords(sf::Mouse::getPosition(window));
-			if (node.getGlobalBounds().contains(worldPosition)) {
-				if (selectingObstacles && (node.getState() == NodeState::open || node.getState() == NodeState::path)) {
-					node.setState(NodeState::obstacle);
-					node.obstacle = true;
-				}
-				else if (deselectingObstacles && node.getState() == NodeState::obstacle) {
-					node.setState(NodeState::open);
-					node.obstacle = false;
-				}
+	grid.forEachNode([&](Node &node) {
+		sf::Vector2f worldPosition = window.mapPixelToCoords(sf::Mouse::getPosition(window));
+		if (node.getGlobalBounds().contains(worldPosition)) {
+			if (selectingObstacles && (node.getState() == NodeState::open || node.getState() == NodeState::path)) {
+				node.setState(NodeState::obstacle);
+				node.obstacle = true;
 			}
-			});
+			else if (deselectingObstacles && node.getState() == NodeState::obstacle) {
+				node.setState(NodeState::open);
+				node.obstacle = false;
+			}
+		}
+	});
 }
 
 void PathFinder::mainLoop() {
@@ -139,7 +137,6 @@ public:
 		return a->globalGoal > b->globalGoal;
 	}
 };
-
 
 bool PathFinder::findPath() {
 	Node* const start = grid.nodeStart;
@@ -191,8 +188,7 @@ bool PathFinder::findPath() {
 
 void PathFinder::drawPath() {
 	if (grid.nodeTarget != nullptr) {
-		Node* node = grid.nodeTarget;
-		node = node->parent;
+		Node* node = grid.nodeTarget->parent;
 		while (node->parent != nullptr) {
 			node->setState(NodeState::path);
 			node = node->parent;
