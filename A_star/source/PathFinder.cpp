@@ -160,12 +160,14 @@ bool PathFinder::findPath() {
 	queue.push(start);
 
 	float possiblyLowerGoal;
+	bool pathFound = false;
 	Node* current = nullptr;
 	while (!queue.empty()) {
 		current = queue.top();
 		queue.pop();
 		current->visited = true;
 		if (current == target) {
+			pathFound = true;
 			break;
 		}
 		for (Node *neighbour: current->neighbours) {
@@ -181,6 +183,9 @@ bool PathFinder::findPath() {
 				queue.push(neighbour);
 			}
 		}
+	}
+	if (!pathFound) {
+		return false;
 	}
 	drawPath();
 	return true;
