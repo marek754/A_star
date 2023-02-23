@@ -25,6 +25,7 @@ private:
 	bool findPath();
 	void drawPath();
 
-	static inline float square(float a);
-	static float heuristic(Node* a, Node* b);
+	inline float square(float a);
+	float heuristic(Node* a, Node* b);
+	bool checkIfDiagonal(const Node* current, const Node* next);
 };

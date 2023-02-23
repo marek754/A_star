@@ -21,6 +21,10 @@ public:
     void setState(NodeState state);
     NodeState getState();
 
+    void setNodePostitionInGrid(int x, int y);
+    int x;
+    int y;
+
     bool obstacle = false;
     bool visited = false;
     float globalGoal;

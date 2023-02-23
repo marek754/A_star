@@ -21,3 +21,8 @@ inline void Node::setState(NodeState state) {
 NodeState Node::getState() {
     return _state;
 }
+
+void Node::setNodePostitionInGrid(int x, int y) {
+	this->x = x;
+	this->y = y;
+}

@@ -168,8 +168,8 @@ bool PathFinder::findPath() {
 		if (current == target) {
 			break;
 		}
-		for (Node* neighbour : current->neighbours) {
-			if (neighbour->visited || neighbour->obstacle) {
+		for (Node *neighbour: current->neighbours) {
+			if (neighbour->visited || neighbour->obstacle || checkIfDiagonal(current, neighbour)) {
 				continue;
 			}
 			possiblyLowerGoal = current->localGoal + heuristic(current, neighbour);
@@ -203,3 +203,63 @@ inline float PathFinder::square(float a) {
 float PathFinder::heuristic(Node* a, Node* b) {
 	return std::sqrtf(PathFinder::square(a->getPosition().x - b->getPosition().x) + square(a->getPosition().y - b->getPosition().y));
 }
+
+bool isInGrid(int x, int y) {
+	return x >= 0 && x < GRID_SIZE_X &&
+		y >= 0 && y < GRID_SIZE_Y;
+}
+
+bool PathFinder::checkIfDiagonal(const Node* current, const Node* next) {
+	const int dx = next->x - current->x;
+	const int dy = next->y - current->y;
+
+	if (dx * dy != 0 && isInGrid(current->x + dx, current->y) && isInGrid(current->x, current->y + dy)) {
+		const Node *nodeA = &grid.nodes->at(current->x + dx).at(current->y);
+		const Node *nodeB = &grid.nodes->at(current->x).at(current->y + dy);
+		return nodeA->obstacle && nodeB->obstacle;
+	}
+	return false;
+}
+
+/*
+bool PathFinder::checkIfDiagonal(const Node* current, const Node* next) {
+	if (current->x < 0 || current->x >= GRID_SIZE_X ||
+		current->y < 0 || current->y >= GRID_SIZE_Y ||
+		next->x < 0 || next->x >= GRID_SIZE_X ||
+		next->y < 0 || next->y >= GRID_SIZE_Y) {
+		return true;
+	}
+	// top left
+	if(current->x == next->x - 1 && current->y == next->y - 1 &&
+		isInGrid(current->x - 1, current->y) &&
+		grid.nodes->at(current->x - 1).at(current->y).obstacle &&
+		isInGrid(current->x, current->y - 1) &&
+		grid.nodes->at(current->x).at(current->y - 1).obstacle) {
+			return true;
+	}
+	// top right
+	if (current->x == next->x + 1 && current->y == next->y - 1 &&
+		isInGrid(current->x, current->y + 1) &&
+		grid.nodes->at(current->x).at(current->y + 1).obstacle &&
+		isInGrid(current->x + 1, current->y) &&
+		grid.nodes->at(current->x + 1).at(current->y).obstacle) {
+		return true;
+	}
+	// bottom left
+	if (current->x == next->x - 1 && current->y == next->y + 1 &&
+		isInGrid(current->x - 1, current->y) &&
+		grid.nodes->at(current->x - 1).at(current->y).obstacle &&
+		isInGrid(current->x, current->y + 1) &&
+		grid.nodes->at(current->x).at(current->y + 1).obstacle) {
+		return true;
+	}
+	// bottom right
+	if (current->x == next->x + 1 && current->y == next->y + 1 &&
+		isInGrid(current->x + 1, current->y) &&
+		grid.nodes->at(current->x + 1).at(current->y).obstacle &&
+		isInGrid(current->x, current->y + 1) &&
+		grid.nodes->at(current->x).at(current->y + 1).obstacle) {
+		return true;
+	}
+	return false;
+}*/
